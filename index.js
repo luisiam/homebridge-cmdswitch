@@ -12,8 +12,8 @@ function cmdSwitchAccessory(log, config){
 	// Retrieve existing config
 	this.log = log;
 	this.name = config.name;
-	this.on_cmd = config.on_cmd ? config.on_cmd : "";
-	this.off_cmd = config.off_cmd ? config.off_cmd : "";
+	this.on_cmd = config.on_cmd || "";
+	this.off_cmd = config.off_cmd || "";
 	this.state_cmd = config.state_cmd && config.keyword ? config.state_cmd + " | grep '" + config.keyword + "'" : "";
 	this.manufacturer = config.manufacturer;
 	this.model = config.model;
@@ -87,7 +87,7 @@ cmdSwitchAccessory.prototype = {
 		if (this.serial) informationService.setCharacteristic(Characteristic.SerialNumber, this.serial);
 
 		// Create a Switch
-		var switchService = new Service.Switch(this.name);
+		var switchService = new Service.Switch();
 
 		switchService
 			.getCharacteristic(Characteristic.On)
