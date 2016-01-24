@@ -39,4 +39,4 @@ Configuration sample:
 | serial       | The serial number of your device.                                             | No       |
 *Nothing will be executed if `on_cmd`, `off_cmd` or `state_cmd` is not defined.
 
-**`state_cmd` and `keyboard` must be defined together for state query to work.
+**`state_cmd` and `keyword` must be defined together for state query to work.
