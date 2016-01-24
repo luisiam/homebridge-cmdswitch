@@ -87,7 +87,7 @@ cmdSwitchAccessory.prototype = {
 		if (this.serial) informationService.setCharacteristic(Characteristic.SerialNumber, this.serial);
 
 		// Create a Switch
-		var switchService = new Service.Switch();
+		var switchService = new Service.Switch(this.name);
 
 		switchService
 			.getCharacteristic(Characteristic.On)
