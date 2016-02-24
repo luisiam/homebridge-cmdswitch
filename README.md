@@ -9,20 +9,18 @@ CMD Plugin for [HomeBridge](https://github.com/nfarina/homebridge)
 # Configuration
 Configuration sample:
  ```
-"accessories": [
-		{
-			"accessory": "cmdSwitch",
-			"name" : "Device Name",
-			"on_cmd": "Command to turn on",
-			"off_cmd": "Command to turn off",
-			"state_cmd": "Command to check state",
-			"keyword": "Keyword to detect ON state",
-			
-			"manufacturer": "Device Manufacturer",
-			"model": "Device Model",
-			"serial": "Device Serial"
-		}
-	],
+"accessories": [{
+	"accessory": "cmdSwitch",
+	"name" : "Device Name",
+	"on_cmd": "Command to turn on",
+	"off_cmd": "Command to turn off",
+	"state_cmd": "Command to check state",
+	"keyword": "Keyword to detect ON state",
+
+	"manufacturer": "Device Manufacturer",
+	"model": "Device Model",
+	"serial": "Device Serial"
+}]
 
 ```
 
