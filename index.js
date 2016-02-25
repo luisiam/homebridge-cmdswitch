@@ -18,6 +18,7 @@ function cmdSwitchAccessory(log, config){
 	this.manufacturer = config.manufacturer;
 	this.model = config.model;
 	this.serial = config.serial;
+	this.state = false;
 }
 
 cmdSwitchAccessory.prototype = {
@@ -25,15 +26,18 @@ cmdSwitchAccessory.prototype = {
 	// Method to determine current state
 	getPowerState: function(callback) {
 
-		var state;
-
 		// Execute command to detect state
-		this.log("Getting " + this.name + " power state...");
-		exec(this.state_cmd, function(error, stdout, stderr) {
-			state = stdout ? true : false;
-			this.log(this.name + " is turned " + (state ? "on." : "off."));
-			callback(null, state);
-		}.bind(this));
+		if (this.state_cmd) {
+			this.log("Getting " + this.name + " power state...");
+			exec(this.state_cmd, function(error, stdout, stderr) {
+				this.state = stdout ? true : false;
+				this.log(this.name + " is turned " + (this.state ? "on." : "off."));
+				callback(null, this.state);
+			}.bind(this));
+		} else {
+			this.log(this.name + " is turned " + (this.state ? "on" : "off") + " (cached).");
+			callback(null, this.state);
+		}
 	},
 
 	// Method to set state
@@ -43,31 +47,42 @@ cmdSwitchAccessory.prototype = {
 		var tout = null;
 
 		// Execute command to set state
-		this.log("Turning " + (on ? "on " : "off ") + this.name + "..." );
-		exec(cmd, function(error, stdout, stderr) {
+		if (cmd) {
+			this.log("Turning " + (on ? "on " : "off ") + this.name + "..." );
+			exec(cmd, function(error, stdout, stderr) {
 
-			// Print out log for debug if any
-			if (stdout) this.log(stdout);
-			if (stderr) this.log(stderr);
+				// Print out log for debug if any
+				if (stdout) this.log(stdout);
+				if (stderr) this.log(stderr);
 
-			// Error detection
-			if (error) this.log("Failed to turn " + (on ? "on " : "off ") + this.name + "!");
-			else this.log(this.name + " is turned " + (on ? "on!" : "off!"));
+				// Error detection
+				if (error) {
+					this.log("Failed to turn " + (on ? "on " : "off ") + this.name + "!");
+					this.state = !on;
+				} else {
+					this.log(this.name + " is turned " + (on ? "on." : "off."));
+					this.state = on;
+				}
 
-			// Work-around: always return success
-			// Rely on getPowerState to check final state
-			if (tout) {
-				clearTimeout(tout);
+				// Work-around: always return success
+				// Rely on getPowerState to check final state
+				if (tout) {
+					clearTimeout(tout);
+					callback();
+				}
+			}.bind(this));
+
+			// Allow 2s to set state but otherwise assumes success
+			tout = setTimeout(function() {
+				tout = null;
+				this.log("Turning " + (on ? "on " : "off ") + this.name + " took too long, assuming success." );
 				callback();
-			}
-		}.bind(this));
-
-		// Allow 2s to set state but otherwise assumes success
-		tout = setTimeout(function() {
-			tout = null;
-			this.log("Turning " + (on ? "on " : "off ") + this.name + " took too long, assuming success." );
+			}.bind(this), 2000);
+		} else {
+			this.log(this.name + " (dummy switch) is turned " + (on ? "on." : "off."));
+			this.state = on;
 			callback();
-		}.bind(this), 2000);
+		}
 	},
 
 	// Method to respond identify request
