@@ -18,7 +18,8 @@ function cmdSwitchAccessory(log, config){
 	this.manufacturer = config.manufacturer;
 	this.model = config.model;
 	this.serial = config.serial;
-	this.state = false;
+	if (config.default == "on")	this.state = true;
+	else				this.state = false;
 }
 
 cmdSwitchAccessory.prototype = {
