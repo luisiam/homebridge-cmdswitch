@@ -14,7 +14,7 @@ function cmdSwitchAccessory(log, config){
 	this.name = config.name;
 	this.on_cmd = config.on_cmd || "";
 	this.off_cmd = config.off_cmd || "";
-	this.state_cmd = config.state_cmd && config.keyword ? config.state_cmd + " | grep '" + config.keyword + "'" : "";
+	this.state_cmd = config.state_cmd || "";
 	this.manufacturer = config.manufacturer;
 	this.model = config.model;
 	this.serial = config.serial;
