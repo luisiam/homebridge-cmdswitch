@@ -29,14 +29,14 @@ cmdSwitchAccessory.prototype = {
 
 		// Execute command to detect state
 		if (this.state_cmd) {
-			this.log("Getting " + this.name + " power state...");
+			this.log("Getting power state...");
 			exec(this.state_cmd, function(error, stdout, stderr) {
 				this.state = stdout ? true : false;
-				this.log(this.name + " is turned " + (this.state ? "on." : "off."));
+				this.log("Current state: " + (this.state ? "on." : "off."));
 				callback(null, this.state);
 			}.bind(this));
 		} else {
-			this.log(this.name + " is turned " + (this.state ? "on" : "off") + " (cached).");
+			this.log("Current state: " + (this.state ? "on" : "off") + " (cached).");
 			callback(null, this.state);
 		}
 	},
@@ -49,7 +49,7 @@ cmdSwitchAccessory.prototype = {
 
 		// Execute command to set state
 		if (cmd) {
-			this.log("Turning " + (on ? "on " : "off ") + this.name + "..." );
+			this.log("Turning " + (on ? "on " : "off ") + "..." );
 			exec(cmd, function(error, stdout, stderr) {
 
 				// Print out log for debug if any
@@ -58,10 +58,10 @@ cmdSwitchAccessory.prototype = {
 
 				// Error detection
 				if (error) {
-					this.log("Failed to turn " + (on ? "on " : "off ") + this.name + "!");
+					this.log("Failed to turn " + (on ? "on " : "off ") + "!");
 					this.state = !on;
 				} else {
-					this.log(this.name + " is turned " + (on ? "on." : "off."));
+					this.log("Turned " + (on ? "on." : "off."));
 					this.state = on;
 				}
 
@@ -76,11 +76,11 @@ cmdSwitchAccessory.prototype = {
 			// Allow 2s to set state but otherwise assumes success
 			tout = setTimeout(function() {
 				tout = null;
-				this.log("Turning " + (on ? "on " : "off ") + this.name + " took too long, assuming success." );
+				this.log("Turning " + (on ? "on " : "off ") + " took too long, assuming success." );
 				callback();
 			}.bind(this), 2000);
 		} else {
-			this.log(this.name + " (dummy switch) is turned " + (on ? "on." : "off."));
+			this.log("Turned " + (on ? "on" : "off") + " (dummy switch).");
 			this.state = on;
 			callback();
 		}
@@ -88,7 +88,7 @@ cmdSwitchAccessory.prototype = {
 
 	// Method to respond identify request
 	identify: function(callback) {
-		this.log(this.name + " identify requested!");
+		this.log("Identify requested!");
 		callback();
 	},
 
