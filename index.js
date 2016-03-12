@@ -26,14 +26,15 @@ cmdSwitchAccessory.prototype = {
 
 	// Method to determine current state
 	getPowerState: function(callback) {
+		var that = this;
 
 		// Execute command to detect state
 		if (this.state_cmd) {
 			exec(this.state_cmd, function(error, stdout, stderr) {
-				this.state = stdout ? true : false;
-				this.log("Current state: " + (this.state ? "on." : "off."));
-				callback(null, this.state);
-			}.bind(this));
+				that.state = stdout ? true : false;
+				that.log("Current state: " + (that.state ? "on." : "off."));
+				callback(null, that.state);
+			};
 		} else {
 			this.log("Current state: " + (this.state ? "on" : "off") + " (cached).");
 			callback(null, this.state);
@@ -42,7 +43,7 @@ cmdSwitchAccessory.prototype = {
 
 	// Method to set state
 	setPowerState: function(on, callback) {
-
+		var that = this;
 		var cmd = on ? this.on_cmd : this.off_cmd;
 		var tout = null;
 
@@ -51,16 +52,16 @@ cmdSwitchAccessory.prototype = {
 			exec(cmd, function(error, stdout, stderr) {
 
 				// Print out log for debug if any
-				if (stdout) this.log(stdout);
-				if (stderr) this.log(stderr);
+				if (stdout) that.log(stdout);
+				if (stderr) that.log(stderr);
 
 				// Error detection
 				if (error) {
-					this.log("Failed to turn " + (on ? "on " : "off ") + "!");
-					this.state = !on;
+					that.log("Failed to turn " + (on ? "on " : "off ") + "!");
+					that.state = !on;
 				} else {
-					this.log("Turned " + (on ? "on." : "off."));
-					this.state = on;
+					that.log("Turned " + (on ? "on." : "off."));
+					that.state = on;
 				}
 
 				// Work-around: always return success
@@ -69,14 +70,14 @@ cmdSwitchAccessory.prototype = {
 					clearTimeout(tout);
 					callback();
 				}
-			}.bind(this));
+			};
 
 			// Allow 2s to set state but otherwise assumes success
 			tout = setTimeout(function() {
 				tout = null;
-				this.log("Turning " + (on ? "on " : "off ") + " took too long, assuming success." );
+				that.log("Turning " + (on ? "on " : "off ") + " took too long, assuming success." );
 				callback();
-			}.bind(this), 2000);
+			}, 2000);
 		} else {
 			this.log("Turned " + (on ? "on" : "off") + " (dummy switch).");
 			this.state = on;
