@@ -34,7 +34,7 @@ cmdSwitchAccessory.prototype = {
 				that.state = stdout ? true : false;
 				that.log("Current state: " + (that.state ? "on." : "off."));
 				callback(null, that.state);
-			};
+			});
 		} else {
 			this.log("Current state: " + (this.state ? "on" : "off") + " (cached).");
 			callback(null, this.state);
@@ -68,7 +68,7 @@ cmdSwitchAccessory.prototype = {
 					clearTimeout(tout);
 					callback();
 				}
-			};
+			});
 
 			// Allow 2s to set state but otherwise assumes success
 			tout = setTimeout(function() {
