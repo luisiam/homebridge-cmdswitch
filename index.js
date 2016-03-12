@@ -51,12 +51,10 @@ cmdSwitchAccessory.prototype = {
 		if (cmd) {
 			exec(cmd, function(error, stdout, stderr) {
 
-				// Print out log for debug if any
-				if (stdout) that.log(stdout);
-				if (stderr) that.log(stderr);
-
 				// Error detection
 				if (error) {
+					that.log(error);
+					that.log(stderr);
 					that.log("Failed to turn " + (on ? "on " : "off ") + "!");
 					that.state = !on;
 				} else {
