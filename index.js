@@ -29,7 +29,6 @@ cmdSwitchAccessory.prototype = {
 
 		// Execute command to detect state
 		if (this.state_cmd) {
-			this.log("Getting power state...");
 			exec(this.state_cmd, function(error, stdout, stderr) {
 				this.state = stdout ? true : false;
 				this.log("Current state: " + (this.state ? "on." : "off."));
@@ -49,7 +48,6 @@ cmdSwitchAccessory.prototype = {
 
 		// Execute command to set state
 		if (cmd) {
-			this.log("Turning " + (on ? "on " : "off ") + "..." );
 			exec(cmd, function(error, stdout, stderr) {
 
 				// Print out log for debug if any
