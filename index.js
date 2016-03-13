@@ -31,11 +31,11 @@ cmdSwitchAccessory.prototype = {
     if (this.state_cmd) {
       exec(this.state_cmd, function(error, stdout, stderr) {
         that.state = stdout ? true : false;
-        that.log("Current state: " + (that.state ? "on." : "off."));
+        that.log("Current state: " + (that.state ? "On." : "Off."));
         callback(null, that.state);
       });
     } else {
-      this.log("Current state: " + (this.state ? "on" : "off") + " (cached).");
+      this.log("Current state: " + (this.state ? "On." : "Off."));
       callback(null, this.state);
     }
   },
@@ -52,9 +52,8 @@ cmdSwitchAccessory.prototype = {
 
         // Error detection
         if (error) {
-          that.log(error);
           that.log(stderr);
-          that.log("Failed to turn " + (on ? "on " : "off ") + "!");
+          that.log("Failed to turn " + (on ? "on!" : "off!"));
           that.state = !on;
         } else {
           that.log("Turned " + (on ? "on." : "off."));
@@ -76,7 +75,7 @@ cmdSwitchAccessory.prototype = {
         callback();
       }, 2000);
     } else {
-      this.log("Turned " + (on ? "on" : "off") + " (dummy switch).");
+      this.log("Turned " + (on ? "on" : "off"));
       this.state = on;
       callback();
     }
