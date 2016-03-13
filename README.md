@@ -15,7 +15,6 @@ Configuration sample:
 	"on_cmd": "Command to turn on",
 	"off_cmd": "Command to turn off",
 	"state_cmd": "Command to detect ON state",
-	"default": "on/off",
 
 	"manufacturer": "Device Manufacturer",
 	"model": "Device Model",
@@ -30,8 +29,7 @@ Configuration sample:
 | name         | The name of your device.                                                      | Yes      |
 | on_cmd       | The command to turn on your device.                                           | No*      |
 | off_cmd      | The command to turn on your device.                                           | No*      |
-| state_cmd    | The command the check the current state of your device.                       | No*     |
-| default      | The default state of your device.                                             | No       |
+| state_cmd    | The command the check the current state of your device.                       | No*      |
 | manufacturer | The manufacturer of your device.                                              | No       |
 | model        | The model of your device.                                                     | No       |
 | serial       | The serial number of your device.                                             | No       |
