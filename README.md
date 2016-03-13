@@ -1,4 +1,4 @@
-# homebridge-cmdswitch
+# homebridge-cmdswitch [![npm version](https://badge.fury.io/js/homebridge-cmdswitch.svg)](https://badge.fury.io/js/homebridge-cmdswitch)
 CMD Plugin for [HomeBridge](https://github.com/nfarina/homebridge)
 
 # Installation
