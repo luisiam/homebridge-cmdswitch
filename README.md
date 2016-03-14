@@ -11,14 +11,14 @@ Configuration sample:
  ```
 "accessories": [{
     "accessory": "cmdSwitch",
-    "name" : "Device Name",
-    "on_cmd": "Command to turn on",
-    "off_cmd": "Command to turn off",
-    "state_cmd": "Command to detect ON state",
+    "name" : "PlayStation 4",
+    "on_cmd": "ps4-waker",
+    "off_cmd": "ps4-waker standby",
+    "state_cmd": "ps4-waker search | grep -i '200Ok'",
 
-    "manufacturer": "Device Manufacturer",
-    "model": "Device Model",
-    "serial": "Device Serial"
+    "manufacturer": "Sony Corporation",
+    "model": "CUH-1001A",
+    "serial": "XXXXXXXXXXX"
 }]
 
 ```
@@ -35,4 +35,4 @@ Configuration sample:
 | model        | The model of your device.                                                     | No       |
 | serial       | The serial number of your device.                                             | No       |
 
-*Nothing will be executed if `on_cmd`, `off_cmd` or `state_cmd` is not defined.
+*Nothing will be executed (dummy switch) if `on_cmd`, `off_cmd` or `state_cmd` is not defined.
