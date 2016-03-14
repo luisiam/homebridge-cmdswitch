@@ -24,15 +24,15 @@ Configuration sample:
 ```
 
 
-| Fields       | Description                                                                   | Required |
-|--------------|-------------------------------------------------------------------------------|----------|
-| accessory    | Must always be `cmdSwitch`.                                                   | Yes      |
-| name         | The name of your device.                                                      | Yes      |
-| on_cmd       | The command to turn on your device.                                           | No*      |
-| off_cmd      | The command to turn on your device.                                           | No*      |
-| state_cmd    | The command the check the current state of your device.                       | No*      |
-| manufacturer | The manufacturer of your device.                                              | No       |
-| model        | The model of your device.                                                     | No       |
-| serial       | The serial number of your device.                                             | No       |
+| Fields       | Description                                       | Required |
+|--------------|---------------------------------------------------|----------|
+| accessory    | Must always be `cmdSwitch`.                       | Yes      |
+| name         | The name of your device.                          | Yes      |
+| on_cmd       | The command to turn on your device.               | No*      |
+| off_cmd      | The command to turn off your device.              | No*      |
+| state_cmd    | The command to detect an ON state of your device. | No*      |
+| manufacturer | The manufacturer of your device.                  | No       |
+| model        | The model of your device.                         | No       |
+| serial       | The serial number of your device.                 | No       |
 
 *Nothing will be executed (dummy switch) if `on_cmd`, `off_cmd` or `state_cmd` is not defined.
