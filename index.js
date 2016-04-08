@@ -102,9 +102,6 @@ cmdSwitchAccessory.prototype = {
       .on('get', this.getPowerState.bind(this))
       .on('set', this.setPowerState.bind(this));
 
-    // Get Initial State
-    switchService.getCharacteristic(Characteristic.On).getValue();
-
     return [informationService, switchService];
   }
 };
