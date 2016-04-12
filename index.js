@@ -51,31 +51,29 @@ cmdSwitchAccessory.prototype = {
       exec(cmd, function(error, stdout, stderr) {
 
         // Error detection
-        if (error) {
+        if (error && (on != that.state)) {
           that.log(stderr);
           that.log("Failed to turn " + (on ? "on!" : "off!"));
-          that.state = !on;
         } else {
           that.log("Turned " + (on ? "on." : "off."));
           that.state = on;
+          error = null;
         }
 
-        // Work-around: always return success
-        // Rely on getPowerState to check final state
         if (tout) {
           clearTimeout(tout);
-          callback();
+          callback(error);
         }
       });
 
       // Allow 2s to set state but otherwise assumes success
       tout = setTimeout(function() {
         tout = null;
-        that.log("Turning " + (on ? "on " : "off ") + " took too long, assuming success." );
+        that.log("Turning " + (on ? "on " : "off ") + "took too long, assuming success." );
         callback();
       }, 2000);
     } else {
-      this.log("Turned " + (on ? "on" : "off"));
+      this.log("Turned " + (on ? "on." : "off."));
       this.state = on;
       callback();
     }
