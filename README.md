@@ -1,5 +1,9 @@
-# homebridge-cmdswitch [![npm version](https://badge.fury.io/js/homebridge-cmdswitch.svg)](https://badge.fury.io/js/homebridge-cmdswitch)
+# homebridge-cmdswitch (Deprecated) [![npm version](https://badge.fury.io/js/homebridge-cmdswitch.svg)](https://badge.fury.io/js/homebridge-cmdswitch)
 CMD Plugin for [HomeBridge](https://github.com/nfarina/homebridge) (API 1.0)
+
+Newer verion using API 2.0: [homebridge-cmdswitch2](https://github.com/luisiam/homebridge-cmdswitch2)
+
+It is strongly advised that you switch to the newer version. No new development will be done on this version.
 
 ### What this plugin does
 This plugin allows you to run Command Line Interface (CLI) commands via HomeKit. This means you can run a simple commands such as `ping`, `shutdown`, or `wakeonlan` just by telling Siri to do so. An example usage for this plugin would be to turn on your PS4 or HTPC, check if it’s on, and even shut it down when finished.
