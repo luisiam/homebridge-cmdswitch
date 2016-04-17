@@ -5,19 +5,6 @@ Newer verion using API 2.0: [homebridge-cmdswitch2](https://github.com/luisiam/h
 
 It is strongly advised that you switch to the newer version. No new development will be done on this version.
 
-### What this plugin does
-This plugin allows you to run Command Line Interface (CLI) commands via HomeKit. This means you can run a simple commands such as `ping`, `shutdown`, or `wakeonlan` just by telling Siri to do so. An example usage for this plugin would be to turn on your PS4 or HTPC, check if it’s on, and even shut it down when finished.
-
-### How this plugin works
-1. `on_cmd`: This is the command issued when the switch is turned ON.
-2. `off_cmd`: This is the command issued when the switch is turned OFF.
-3. `state_cmd`: This is the command issued when HomeBridge checks the state of the switch.
-  1. If there is no error, HomeBridge is notified that the switch is ON.
-  2. If there is an error, HomeBridge is notified that the switch is OFF.
-
-### Things to know about this plugin
-This plugin can only run CLI commands the same as you typing them yourself. In order to test if your `on_cmd`, `off_cmd`, or `state_cmd` are valid commands you need to run them from your CLI. Please keep in mind you will want to run these commands from the same user that runs (or owns) the HomeBridge service if different than your root user.
-
 # Installation
 1. Install homebridge using `npm install -g homebridge`.
 2. Install this plugin using `npm install -g homebridge-cmdswitch`.
